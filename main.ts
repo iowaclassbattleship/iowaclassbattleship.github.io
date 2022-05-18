@@ -28,10 +28,9 @@ interface IMode {
     checkGrid(parent: HTMLElement): void
 
     renderTask(parent: HTMLElement): void,
-    getDigit?(): IDigit,
 }
 
-interface IModeStar extends Omit<IMode, "getDigit"> {
+interface IModeStar extends IMode {
     coords: any[];
     getLine(c: any): SVGLineElement;
 }
@@ -171,6 +170,7 @@ class Star implements IModeStar {
         line.setAttribute("x2", "" + this.starDimensions);
         line.setAttribute("y2", "" + this.starDimensions);
         line.setAttribute("style", "stroke:rgb(0,0,0);stroke-width:2")
+        e.meta.checked = true;
         e.appendChild(line);
     }
 
@@ -221,7 +221,17 @@ class Star implements IModeStar {
     }
 
     checkGrid(parent: HTMLElement): void {
-        throw new Error("Method not implemented.");
+        const elements: any = parent.children;
+
+        for (let i = 0; i < elements.length; i++) {
+            if (elements[i].meta.number === 5) {
+                if (elements[i].meta.checked === true) {
+                    elements[i].classList.add("correct--checked");
+                } else {
+                    elements[i].classList.add("correct--unchecked");
+                }
+            }
+        }
     }
 }
 
