@@ -3,20 +3,19 @@
 <meta charset="UTF-8">
 <title>Konzentriertes Arbeiten</title>
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<link rel="stylesheet" href="styles.css">
 
 <body>
-    <aside class="controls">
-        <button onclick="generate()">Generate</button>
-        <button onclick="check()">Check</button>
+    <aside class="controls" data-js="controls">
+        <!-- <button onclick="generate()">Generate</button>
+        <button onclick="check()">Check</button> -->
     </aside>
-    <main class="A4">
+    <main class="worksheet-container">
         <div class="grid" data-js="worksheet"></div>
     </main>
     <aside class="task" data-js="task"></aside>
 
     <div id="hidden-pixel-density-measure"></div>
-    <script src="main.js"></script>
+    <script src="bundle.js"></script>
 </body>
 
 </html>
