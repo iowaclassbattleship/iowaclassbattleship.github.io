@@ -1,4 +1,4 @@
-import { IDigit, IExtendedHtmlDivElement, IMode } from "./interfaces";
+import { IDigit, IExtendedHtmlDivElement, IMode } from "../model/interfaces";
 
 enum E_PQ {
     p,

@@ -1,8 +1,8 @@
 import "../styles/styles.scss";
-import { Circle } from "./circle";
-import { IMode } from "./interfaces";
-import { PQ } from "./pq";
-import { Star } from "./star";
+import { Circle } from "./modes/circle";
+import { IMode } from "./model/interfaces";
+import { PQ } from "./modes/pq";
+import { Star } from "./modes/star";
 
 const digits: number = 1600;
 

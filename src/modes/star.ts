@@ -1,5 +1,5 @@
-import { IExtendedSVGSVGElement, IModeStar } from "./interfaces";
-import { getDimensions } from "./tools";
+import { IExtendedSVGSVGElement, IModeStar } from "../model/interfaces";
+import { getDimensions } from "../tools";
 
 export class Star implements IModeStar {
     taskText: string = "fartharder";
