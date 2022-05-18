@@ -37,26 +37,24 @@ export class Circle implements IMode {
         circle.setAttribute("width", "" + this.dimensions);
         circle.setAttribute("height", "" + this.dimensions);
 
-        const ring = document.createElementNS(
-            "http://www.w3.org/2000/svg",
-            "circle",
-        );
+        const ring = document.createElementNS("http://www.w3.org/2000/svg", "circle");
         ring.setAttributeNS(null, 'cx', "" + this.dimensions / 2);
         ring.setAttributeNS(null, 'cy', "" + this.dimensions / 2);
         ring.setAttributeNS(null, 'r', "" + (this.dimensions / 2 - 3));
         ring.setAttributeNS(null, 'style', 'fill: none; stroke: black; stroke-width: 3px;' );
         circle.appendChild(ring);
 
-        const line = document.createElementNS(
-            "http://www.w3.org/2000/svg",
-            "line",
-        );
+        const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
         line.setAttribute("x1", "0");
-        line.setAttribute("y1", "0");
+        line.setAttribute("y1", "" + (this.dimensions / 2));
         line.setAttribute("x2", "" + this.dimensions / 2);
-        line.setAttribute("y2", "" + this.dimensions / 2);
+        line.setAttribute("y2", "" + (this.dimensions / 2));
         line.setAttribute("style", "stroke:white;stroke-width:5")
         circle.appendChild(line);
+
+        const random = Math.floor(Math.random() * 8);
+
+        circle.style.transform = `rotate(${random * 45}deg)`;
 
         return circle;
     }

@@ -7,7 +7,7 @@ enum E_PQ {
 
 export class PQ implements IMode {
     taskText: string = "Check every p BEFORE a q";
-    digits: number = 0;
+    digits: number;
     taskContainer: HTMLElement;
 
     public constructor(
@@ -57,7 +57,7 @@ export class PQ implements IMode {
         }
     }
 
-    renderTask(taskContainer: HTMLElement) {
+    renderTask(taskContainer: HTMLElement): void {
         taskContainer.innerHTML = this.taskText;
     }
 
