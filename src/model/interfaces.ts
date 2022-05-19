@@ -29,10 +29,10 @@ export interface IMode {
     digits: number,
     taskContainer: HTMLElement
 
-    generateGrid(parent: HTMLElement): void,
-    checkGrid(parent: HTMLElement): void
-    renderTask(parent: HTMLElement): void,
-    handleClick(e: any): void
+    generateGrid?(parent: HTMLElement): void,
+    checkGrid?(parent: HTMLElement): void
+    renderTask?(parent: HTMLElement): void,
+    handleClick?(e: any): void
 }
 
 export enum EMode {

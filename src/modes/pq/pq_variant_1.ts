@@ -1,3 +1,4 @@
+import { setDefaultResultOrder } from "dns";
 import { IDigit, IExtendedHtmlDivElement, IMode } from "../../model/interfaces";
 import { CHECKED, CORRECT_CHECKED, CORRECT_UNCHECKED } from "../../tools";
 
@@ -19,27 +20,6 @@ export class PQ_Variant_1 implements IMode {
         this.taskContainer = taskContainer;
     }
 
-    generateGrid(parent: HTMLElement): void {
-        parent.innerHTML = null;
-        for (let i = 0; i < this.digits; i++) {
-            const digit = this.getDigit();
-
-            const d: IExtendedHtmlDivElement = document.createElement("div");
-            d.classList.add("item");
-            d.innerHTML = digit.digit;
-
-            d.meta = {
-                number: digit.number,
-                checked: false
-            };
-
-            d.addEventListener("click", () => this.handleClick(d));
-            parent.appendChild(d);
-        }
-
-        this.renderTask(this.taskContainer);
-    }
-
     checkGrid(parent: HTMLElement): void {
         const elements: any = parent.children;
 
@@ -58,19 +38,5 @@ export class PQ_Variant_1 implements IMode {
 
     renderTask(taskContainer: HTMLElement): void {
         taskContainer.innerHTML = this.taskText;
-    }
-
-    handleClick(e: IExtendedHtmlDivElement): void {
-        e.classList.add(CHECKED);
-        e.meta.checked = true;
-    }
-
-    getDigit(): IDigit {
-        let random = Math.floor(Math.random() * 2);
-
-        return {
-            number: random,
-            digit: E_PQ[random],
-        };
     }
 }
