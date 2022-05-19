@@ -1,10 +1,9 @@
-import { IExtendedSVGSVGElement, IModeStar } from "../model/interfaces";
+import { IExtendedSVGSVGElement, IMode } from "../model/interfaces";
 import { getDimensions } from "../tools";
 
-export class Star implements IModeStar {
+export class Star implements IMode {
     taskText: string = "fartharder";
     taskContainer: HTMLElement;
-    points: number;
     digits: number;
     dimensions: number = 0;
     coords: any[] = [];
@@ -12,10 +11,8 @@ export class Star implements IModeStar {
     public constructor(
         taskContainer: HTMLElement,
         digits: number,
-        points: number,
     ) {
         this.taskContainer = taskContainer;
-        this.points = points;
         this.dimensions = getDimensions() - 2;
         this.digits = digits;
         this.coords = [

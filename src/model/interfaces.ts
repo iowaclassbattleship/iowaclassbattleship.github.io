@@ -26,7 +26,3 @@ export interface IMode {
     renderTask(parent: HTMLElement): void,
     handleClick(e: any): void
 }
-
-export interface IModeStar extends IMode {
-    coords: any[];
-}

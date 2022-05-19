@@ -11,9 +11,9 @@ const worksheet: HTMLElement = document.querySelector(`[data-js="worksheet"]`);
 const task: HTMLElement = document.querySelector(`[data-js="task"]`);
 
 const modes: IMode[] = [
-    // new PQ(task, digits),
-    // new Star(task, digits, 8),
-    // new Circle(task, digits),
+    new PQ(task, digits),
+    new Star(task, digits),
+    new Circle(task, digits),
     new Numbers(task, digits)
 ];
 
