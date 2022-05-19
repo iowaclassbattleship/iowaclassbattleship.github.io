@@ -7,17 +7,19 @@ export interface IExtendedSVGSVGElement extends SVGSVGElement {
 }
 
 export interface IMeta {
-    number: Number,
+    number?: Number,
     checked: boolean
 }
 
 export interface IDigit {
-    number: Number,
+    number: number,
     digit: string
 }
 
 export interface IMode {
     taskText: string,
+    digits: number,
+    taskContainer: HTMLElement
 
     generateGrid(parent: HTMLElement): void,
     checkGrid(parent: HTMLElement): void

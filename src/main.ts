@@ -3,6 +3,7 @@ import { Circle } from "./modes/circle";
 import { IMode } from "./model/interfaces";
 import { PQ } from "./modes/pq";
 import { Star } from "./modes/star";
+import { Numbers } from "./modes/numbers";
 
 const digits: number = 1600;
 
@@ -10,9 +11,10 @@ const worksheet: HTMLElement = document.querySelector(`[data-js="worksheet"]`);
 const task: HTMLElement = document.querySelector(`[data-js="task"]`);
 
 const modes: IMode[] = [
-    new PQ(task, digits),
-    new Star(task, digits, 8),
-    new Circle(task, digits)
+    // new PQ(task, digits),
+    // new Star(task, digits, 8),
+    // new Circle(task, digits),
+    new Numbers(task, digits)
 ];
 
 export function renderControls(): void {

@@ -23,7 +23,7 @@ export class PQ implements IMode {
         for (let i = 0; i < this.digits; i++) {
             const digit = this.getDigit();
 
-            let d: IExtendedHtmlDivElement = document.createElement("div");
+            const d: IExtendedHtmlDivElement = document.createElement("div");
             d.classList.add("item");
             d.innerHTML = digit.digit;
 

@@ -24,10 +24,23 @@ export class Circle implements IMode {
             circle.addEventListener("click", () => this.handleClick(circle));
             parent.appendChild(circle);
         }
+
+        this.renderTask(this.taskContainer);
     }
 
     checkGrid(parent: HTMLElement): void {
-        throw new Error("Method not implemented.");
+        const elements: any = parent.children;
+
+        for (let i = 0; i < elements.length - 1; i++) {
+            if (
+                elements[i + 1].meta.number == 1 ||
+                elements[i + 1].meta.number == 3 ||
+                elements[i + 1].meta.number == 5 ||
+                elements[i + 1].meta.number == 7
+            ) {
+                elements[i].classList.add("correct--checked");
+            }
+        }
     }
 
     renderTask(parent: HTMLElement): void {
