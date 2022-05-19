@@ -14,7 +14,7 @@ const taskContainer: HTMLElement = document.querySelector(`[data-js="task"]`);
 const modes: IModeController[] = [
     new PQ(taskContainer, nSymbols),
     new Numbers(taskContainer, nSymbols),
-    new Star(taskContainer, nSymbols, 5),
+    new Star(taskContainer, nSymbols),
     new Circle(taskContainer, nSymbols)
 ];
 

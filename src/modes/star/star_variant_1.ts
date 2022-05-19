@@ -2,7 +2,7 @@ import { IExtendedSVGSVGElement, IMode, ICoords } from "../../model/interfaces";
 import { CORRECT_CHECKED, CORRECT_UNCHECKED, getDimensions, getPerimeterCoords, W3_SVG } from "../../tools";
 
 export class Star_Variant_1 implements IMode {
-    taskText: string = "fartharder";
+    taskText: string;
     taskContainer: HTMLElement;
     digits: number;
     dimensions: number;
@@ -19,6 +19,7 @@ export class Star_Variant_1 implements IMode {
         this.digits = digits;
         this.coords = getPerimeterCoords(this.dimensions);
         this.starEdges = starEdges;
+        this.taskText = `Markiere alle Sterne, die ${this.starEdges} Zacken haben`;
     }
 
     generateGrid(parent: HTMLElement): void {

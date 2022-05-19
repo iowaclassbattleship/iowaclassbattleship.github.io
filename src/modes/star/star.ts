@@ -8,10 +8,9 @@ export class Star implements IModeController {
     public constructor(
         taskContainer: HTMLElement,
         nSymbols: number,
-        starEdges: number
     ) {
         this.variants = [
-            new Star_Variant_1(taskContainer, nSymbols, starEdges)
+            new Star_Variant_1(taskContainer, nSymbols, Math.floor(Math.random() * 6))
         ];
     }
 
