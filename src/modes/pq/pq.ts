@@ -1,76 +1,31 @@
-import { IDigit, IExtendedHtmlDivElement, IMode } from "../../model/interfaces";
-import { CHECKED, CORRECT_CHECKED, CORRECT_UNCHECKED } from "../../tools";
+import { IMode, IModeController } from "../../model/interfaces";
+import { PQ_Variant_1 } from "./pq_variant_1";
 
-enum E_PQ {
+export enum E_PQ {
     p,
     q
 }
 
-export class PQ implements IMode {
-    taskText: string = "Check every p BEFORE a q";
-    digits: number;
-    taskContainer: HTMLElement;
+export class PQ implements IModeController {
+    private variants: any[] = [];
+    private currentMode: IMode;
 
-    public constructor(
+    constructor(
         taskContainer: HTMLElement,
         digits: number
     ) {
-        this.digits = digits;
-        this.taskContainer = taskContainer;
+        this.variants = [
+            new PQ_Variant_1(taskContainer, digits)
+        ];
     }
 
     generateGrid(parent: HTMLElement): void {
-        parent.innerHTML = null;
-        for (let i = 0; i < this.digits; i++) {
-            const digit = this.getDigit();
+        this.currentMode = this.variants[Math.floor(Math.random() * this.variants.length)];
 
-            const d: IExtendedHtmlDivElement = document.createElement("div");
-            d.classList.add("item");
-            d.innerHTML = digit.digit;
-
-            d.meta = {
-                number: digit.number,
-                checked: false
-            };
-
-            d.addEventListener("click", () => this.handleClick(d));
-            parent.appendChild(d);
-        }
-
-        this.renderTask(this.taskContainer);
+        this.currentMode.generateGrid(parent);
     }
 
     checkGrid(parent: HTMLElement): void {
-        const elements: any = parent.children;
-
-        for (let i = 0; i < elements.length - 1; i++) {
-            if (elements[i].meta.number === E_PQ.p && elements[i + 1].meta.number === E_PQ.q) {
-                if (elements[i].meta.checked) {
-                    elements[i].classList.add(CORRECT_CHECKED);
-                } else {
-                    elements[i].classList.add(CORRECT_UNCHECKED);
-                }
-            } else if (elements[i].meta.checked) {
-                elements[i].classList.add(CORRECT_UNCHECKED);
-            }
-        }
-    }
-
-    renderTask(taskContainer: HTMLElement): void {
-        taskContainer.innerHTML = this.taskText;
-    }
-
-    handleClick(e: IExtendedHtmlDivElement): void {
-        e.classList.add(CHECKED);
-        e.meta.checked = true;
-    }
-
-    getDigit(): IDigit {
-        let random = Math.floor(Math.random() * 2);
-
-        return {
-            number: random,
-            digit: E_PQ[random],
-        };
+        this.currentMode.checkGrid(parent);
     }
 }

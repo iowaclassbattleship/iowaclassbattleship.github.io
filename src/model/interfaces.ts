@@ -16,6 +16,11 @@ export interface IDigit {
     digit: string
 }
 
+export interface IModeController {
+    generateGrid(parent: HTMLElement): void;
+    checkGrid(parent: HTMLElement): void;
+}
+
 export interface IMode {
     taskText: string,
     digits: number,
