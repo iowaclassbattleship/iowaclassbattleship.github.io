@@ -50,10 +50,8 @@ export class PQ implements IMode {
                 } else {
                     elements[i].classList.add(CORRECT_UNCHECKED);
                 }
-            } else {
-                if (elements[i].meta.checked) {
-                    elements[i].classList.add(CORRECT_UNCHECKED);
-                }
+            } else if (elements[i].meta.checked) {
+                elements[i].classList.add(CORRECT_UNCHECKED);
             }
         }
     }
