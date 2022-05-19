@@ -14,7 +14,7 @@ const task: HTMLElement = document.querySelector(`[data-js="task"]`);
 const modes: IMode[] = [
     new PQ(task, digits),
     new Numbers(task, digits),
-    new Star(task, digits),
+    new Star(task, digits, 5),
     new Circle(task, digits),
 ];
 

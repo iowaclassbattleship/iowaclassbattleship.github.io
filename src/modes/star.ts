@@ -1,21 +1,24 @@
 import { IExtendedSVGSVGElement, IMode, ICoords } from "../model/interfaces";
-import { getDimensions, getPerimeterCoords } from "../tools";
+import { CORRECT_CHECKED, CORRECT_UNCHECKED, getDimensions, getPerimeterCoords, W3_SVG } from "../tools";
 
 export class Star implements IMode {
     taskText: string = "fartharder";
     taskContainer: HTMLElement;
     digits: number;
-    dimensions: number = 0;
+    dimensions: number;
+    starEdges: number;
     coords: ICoords[] = [];
 
     public constructor(
         taskContainer: HTMLElement,
         digits: number,
+        starEdges: number,
     ) {
         this.taskContainer = taskContainer;
         this.dimensions = getDimensions() - 2;
         this.digits = digits;
         this.coords = getPerimeterCoords(this.dimensions);
+        this.starEdges = starEdges;
     }
 
     generateGrid(parent: HTMLElement): void {
@@ -34,15 +37,15 @@ export class Star implements IMode {
         const elements: any = parent.children;
 
         for (let i = 0; i < elements.length; i++) {
-            if (elements[i].meta.number === 5) {
+            if (elements[i].meta.number === this.starEdges) {
                 if (elements[i].meta.checked) {
-                    elements[i].classList.add("correct--checked");
+                    elements[i].classList.add(CORRECT_CHECKED);
                 } else {
-                    elements[i].classList.add("correct--unchecked");
+                    elements[i].classList.add(CORRECT_UNCHECKED);
                 }
             } else {
                 if (elements[i].meta.checked) {
-                    elements[i].classList.add("correct-unchecked");
+                    elements[i].classList.add(CORRECT_UNCHECKED);
                 }
             }
         }
@@ -53,7 +56,7 @@ export class Star implements IMode {
     }
 
     handleClick(e: IExtendedSVGSVGElement): void {
-        const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+        const line = document.createElementNS(W3_SVG, "line");
         line.setAttribute("x1", "0");
         line.setAttribute("y1", "" + this.dimensions);
         line.setAttribute("x2", "" + this.dimensions);
@@ -64,7 +67,7 @@ export class Star implements IMode {
     }
 
     getStar(): IExtendedSVGSVGElement {
-        const svg: IExtendedSVGSVGElement = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        const svg: IExtendedSVGSVGElement = document.createElementNS(W3_SVG, "svg");
         svg.setAttribute("width", "" + this.dimensions);
         svg.setAttribute("height", "" + this.dimensions);
 
@@ -72,7 +75,7 @@ export class Star implements IMode {
 
         const c = [].concat(this.coords);
         for (let i = 0; i < random; i++) {
-            const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+            const line = document.createElementNS(W3_SVG, "line");
             let randomCoordIdx = Math.floor(Math.random() * c.length);
             let coord = c[randomCoordIdx]
             line.setAttribute("x1", "" + this.dimensions / 2);

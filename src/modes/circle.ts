@@ -1,5 +1,5 @@
 import { ICoords, IExtendedSVGSVGElement, IMode } from "../model/interfaces";
-import { getPerimeterCoords, getDimensions, getCenterCoords } from "../tools";
+import { getPerimeterCoords, getDimensions, getCenterCoords, CORRECT_UNCHECKED, CORRECT_CHECKED, W3_SVG } from "../tools";
 
 export class Circle implements IMode {
     taskText: string = "John Mcclain";
@@ -40,7 +40,13 @@ export class Circle implements IMode {
                 elements[i + 1].meta.number === 4 ||
                 elements[i + 1].meta.number === 6
             ) {
-                elements[i].classList.add("correct--checked");
+                if (elements[i].meta.checked) {
+                    elements[i].classList.add(CORRECT_CHECKED);
+                } else {
+                    elements[i].classList.add(CORRECT_UNCHECKED);
+                }
+            } else if (elements[i].meta.checked) {
+                elements[i].classList.add(CORRECT_UNCHECKED);
             }
         }
     }
@@ -50,7 +56,7 @@ export class Circle implements IMode {
     }
 
     handleClick(e: IExtendedSVGSVGElement): void {
-        const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+        const line = document.createElementNS(W3_SVG, "line");
         line.setAttribute("x1", "0");
         line.setAttribute("y1", "" + this.dimensions);
         line.setAttribute("x2", "" + this.dimensions);
@@ -61,11 +67,11 @@ export class Circle implements IMode {
     }
 
     getCircle(): IExtendedSVGSVGElement {
-        const circle: IExtendedSVGSVGElement = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        const circle: IExtendedSVGSVGElement = document.createElementNS(W3_SVG, "svg");
         circle.setAttribute("width", "" + this.dimensions);
         circle.setAttribute("height", "" + this.dimensions);
 
-        const ring = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+        const ring = document.createElementNS(W3_SVG, "circle");
         ring.setAttributeNS(null, 'cx', "" + this.dimensions / 2);
         ring.setAttributeNS(null, 'cy', "" + this.dimensions / 2);
         ring.setAttributeNS(null, 'r', "" + (this.dimensions / 2 - 3));
@@ -76,7 +82,7 @@ export class Circle implements IMode {
         const sourceCoords: ICoords = this.coords[random];
         const targetCoords: ICoords = getCenterCoords(this.dimensions);
 
-        const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+        const line = document.createElementNS(W3_SVG, "line");
         line.setAttribute("x1", "" + sourceCoords.x);
         line.setAttribute("y1", "" + sourceCoords.y);
         line.setAttribute("x2", "" + targetCoords.x);
