@@ -35,10 +35,10 @@ export class Circle implements IMode {
 
         for (let i = 0; i < elements.length - 1; i++) {
             if (
-                elements[i + 1].meta.number == 0 ||
-                elements[i + 1].meta.number == 2 ||
-                elements[i + 1].meta.number == 4 ||
-                elements[i + 1].meta.number == 6
+                elements[i + 1].meta.number === 0 ||
+                elements[i + 1].meta.number === 2 ||
+                elements[i + 1].meta.number === 4 ||
+                elements[i + 1].meta.number === 6
             ) {
                 elements[i].classList.add("correct--checked");
             }

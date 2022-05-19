@@ -43,7 +43,7 @@ export class PQ implements IMode {
         const elements: any = parent.children;
 
         for (let i = 0; i < elements.length - 1; i++) {
-            if (elements[i].meta.number == E_PQ.p && elements[i + 1].meta.number == E_PQ.q) {
+            if (elements[i].meta.number === E_PQ.p && elements[i + 1].meta.number === E_PQ.q) {
                 if (elements[i].meta.checked) {
                     elements[i].classList.add("correct--checked");
                 } else {

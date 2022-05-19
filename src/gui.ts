@@ -27,13 +27,13 @@ export class GUI {
         select.id = "mode-select";
 
         for (let i = 0; i < options.length; i++) {
-            select.appendChild(this.generateOption(EMode[i], options[i]))
+            select.appendChild(this.generateOption(i, options[i]))
         }
 
         return select;
     }
 
-    private generateOption(mode: string, option: string): HTMLOptionElement {
+    private generateOption(mode: number, option: string): HTMLOptionElement {
         const o: HTMLOptionElement = document.createElement("option");
 
         o.value = "" + mode;

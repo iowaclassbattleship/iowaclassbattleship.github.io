@@ -1,6 +1,6 @@
 import "../styles/styles.scss";
 import { Circle } from "./modes/circle";
-import { IMode } from "./model/interfaces";
+import { EMode, IMode } from "./model/interfaces";
 import { PQ } from "./modes/pq";
 import { Star } from "./modes/star";
 import { Numbers } from "./modes/numbers";
@@ -24,7 +24,21 @@ const gui: GUI = new GUI;
 gui.renderControls();
 
 export function generate() {
-    randomMode = modes[Math.floor(Math.random() * modes.length)];
+    const currentMode: number = Number(gui.getSelectValue());
+    console.log(currentMode);
+
+    if (currentMode === EMode.RANDOM_ALL) {
+        randomMode = modes[Math.floor(Math.random() * modes.length)];
+    } else if (currentMode === EMode.PQ) {
+        randomMode = modes[EMode.PQ];
+    } else if (currentMode === EMode.NUMBERS) {
+        randomMode = modes[EMode.NUMBERS];
+    } else if (currentMode === EMode.CIRCLE) {
+        randomMode = modes[EMode.CIRCLE];
+    } else {
+        throw new Error("Life sucks m8");
+    }
+
     randomMode.generateGrid(worksheet);
 }
 

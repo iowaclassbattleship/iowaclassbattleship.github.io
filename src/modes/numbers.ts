@@ -66,10 +66,10 @@ export class Numbers implements IMode {
     }
 
     isEven(n: number): boolean {
-        return n % 2 == 0;
+        return n % 2 === 0;
     }
 
     isOdd(n: number): boolean {
-        return n % 2 != 0;
+        return n % 2 !== 0;
     }
 }
