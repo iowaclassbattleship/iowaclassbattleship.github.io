@@ -5,17 +5,18 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 
 <body>
-    <aside class="controls" data-js="controls">
-        <!-- <button onclick="generate()">Generate</button>
-        <button onclick="check()">Check</button> -->
-    </aside>
-    <main class="worksheet-container">
-        <div class="grid" data-js="worksheet"></div>
-    </main>
-    <aside class="task" data-js="task"></aside>
+    <div class="app">
+        <div class="head">
+            <div class="task" data-js="task"></div>
+        </div>
+        <main class="worksheet-container">
+            <div class="controls" data-js="controls"></div>
+            <div class="grid" data-js="worksheet"></div>
+        </main>
 
-    <div id="hidden-pixel-density-measure"></div>
-    <script src="bundle.js"></script>
+        <div id="hidden-pixel-density-measure"></div>
+        <script src="bundle.js"></script>
+    </div>
 </body>
 
 </html>
