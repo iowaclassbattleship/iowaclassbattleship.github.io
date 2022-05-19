@@ -20,7 +20,9 @@ export class Circle implements IMode {
         parent.innerHTML = null;
 
         for (let i = 0; i < this.digits; i++) {
-            parent.appendChild(this.getCircle());
+            const circle: SVGSVGElement = this.getCircle();
+            circle.addEventListener("click", () => this.handleClick(circle));
+            parent.appendChild(circle);
         }
     }
 
@@ -32,6 +34,17 @@ export class Circle implements IMode {
         parent.innerHTML = this.taskText;
     }
 
+    handleClick(e: IExtendedSVGSVGElement): void {
+        const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+        line.setAttribute("x1", "0");
+        line.setAttribute("y1", "" + this.dimensions);
+        line.setAttribute("x2", "" + this.dimensions);
+        line.setAttribute("y2", "0");
+        line.setAttribute("style", "stroke:rgb(0,0,0);stroke-width:2")
+        e.meta.checked = true;
+        e.appendChild(line);
+    }
+
     getCircle(): IExtendedSVGSVGElement {
         const circle: IExtendedSVGSVGElement = document.createElementNS("http://www.w3.org/2000/svg", "svg");
         circle.setAttribute("width", "" + this.dimensions);
@@ -41,7 +54,7 @@ export class Circle implements IMode {
         ring.setAttributeNS(null, 'cx', "" + this.dimensions / 2);
         ring.setAttributeNS(null, 'cy', "" + this.dimensions / 2);
         ring.setAttributeNS(null, 'r', "" + (this.dimensions / 2 - 3));
-        ring.setAttributeNS(null, 'style', 'fill: none; stroke: black; stroke-width: 3px;' );
+        ring.setAttributeNS(null, 'style', 'fill: none; stroke: black; stroke-width: 3px;');
         circle.appendChild(ring);
 
         const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
@@ -55,6 +68,10 @@ export class Circle implements IMode {
         const random = Math.floor(Math.random() * 8);
 
         circle.style.transform = `rotate(${random * 45}deg)`;
+        circle.meta = {
+            number: random,
+            checked: false
+        };
 
         return circle;
     }

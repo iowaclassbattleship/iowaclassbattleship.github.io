@@ -22,6 +22,7 @@ export interface IMode {
     generateGrid(parent: HTMLElement): void,
     checkGrid(parent: HTMLElement): void
     renderTask(parent: HTMLElement): void,
+    handleClick(e: any): void
 }
 
 export interface IModeStar extends IMode {

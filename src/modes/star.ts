@@ -6,7 +6,7 @@ export class Star implements IModeStar {
     taskContainer: HTMLElement;
     points: number;
     digits: number;
-    starDimensions: number = 0;
+    dimensions: number = 0;
     coords: any[] = [];
 
     public constructor(
@@ -16,7 +16,7 @@ export class Star implements IModeStar {
     ) {
         this.taskContainer = taskContainer;
         this.points = points;
-        this.starDimensions = getDimensions() - 2;
+        this.dimensions = getDimensions() - 2;
         this.digits = digits;
         this.coords = [
             {
@@ -24,32 +24,32 @@ export class Star implements IModeStar {
                 y: "0"
             },
             {
-                x: "" + this.starDimensions / 2,
+                x: "" + this.dimensions / 2,
                 y: "0"
             },
             {
-                x: "" + this.starDimensions,
+                x: "" + this.dimensions,
                 y: "0"
             },
             {
                 x: "0",
-                y: "" + this.starDimensions / 2
+                y: "" + this.dimensions / 2
             },
             {
                 x: "0",
-                y: "" + this.starDimensions
+                y: "" + this.dimensions
             },
             {
-                x: "" + this.starDimensions / 2,
-                y: "" + this.starDimensions
+                x: "" + this.dimensions / 2,
+                y: "" + this.dimensions
             },
             {
-                x: "" + this.starDimensions / 2,
-                y: "" + this.starDimensions
+                x: "" + this.dimensions / 2,
+                y: "" + this.dimensions
             },
             {
-                x: "" + this.starDimensions,
-                y: "" + this.starDimensions
+                x: "" + this.dimensions,
+                y: "" + this.dimensions
             },
         ];
     }
@@ -90,13 +90,10 @@ export class Star implements IModeStar {
     }
 
     handleClick(e: IExtendedSVGSVGElement): void {
-        const line = document.createElementNS(
-            "http://www.w3.org/2000/svg",
-            "line",
-        );
+        const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
         line.setAttribute("x1", "0");
-        line.setAttribute("y1", "" + this.starDimensions);
-        line.setAttribute("x2", "" + this.starDimensions);
+        line.setAttribute("y1", "" + this.dimensions);
+        line.setAttribute("x2", "" + this.dimensions);
         line.setAttribute("y2", "0");
         line.setAttribute("style", "stroke:rgb(0,0,0);stroke-width:2")
         e.meta.checked = true;
@@ -105,8 +102,8 @@ export class Star implements IModeStar {
 
     getStar(): IExtendedSVGSVGElement {
         const svg: IExtendedSVGSVGElement = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-        svg.setAttribute("width", "" + this.starDimensions);
-        svg.setAttribute("height", "" + this.starDimensions);
+        svg.setAttribute("width", "" + this.dimensions);
+        svg.setAttribute("height", "" + this.dimensions);
 
         const random: number = Math.floor(this.norm() * 8);
 
@@ -118,8 +115,8 @@ export class Star implements IModeStar {
             );
             let randomCoordIdx = Math.floor(Math.random() * c.length);
             let coord = c[randomCoordIdx]
-            line.setAttribute("x1", "" + this.starDimensions / 2);
-            line.setAttribute("y1", "" + this.starDimensions / 2);
+            line.setAttribute("x1", "" + this.dimensions / 2);
+            line.setAttribute("y1", "" + this.dimensions / 2);
             line.setAttribute("x2", coord.x);
             line.setAttribute("y2", coord.y);
             line.setAttribute("style", "stroke:rgb(0,0,0);stroke-width:1")
