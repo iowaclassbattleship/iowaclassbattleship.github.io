@@ -4,14 +4,18 @@ import { Hexagon_Variant_1 } from "./hexagon_variant_1";
 export class Hexagon implements IModeController {
     variants: any[];
     currentMode: IMode;
+    taskContainer: HTMLElement;
+    nSymbols: number;
 
     public constructor(
         taskContainer: HTMLElement,
         nSymbols: number
     ) {
+        this.taskContainer = taskContainer;
+        this.nSymbols = nSymbols;
         this.variants = [
             new Hexagon_Variant_1()
-        ]
+        ];
     }
 
     generateGrid(parent: HTMLElement): void {

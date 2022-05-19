@@ -22,17 +22,16 @@ export interface IModeController {
 
     generateGrid(parent: HTMLElement): void;
     checkGrid(parent: HTMLElement): void;
+    handleClick?(e: any): void
+
 }
 
 export interface IMode {
     taskText: string,
-    digits: number,
     taskContainer: HTMLElement
 
-    generateGrid?(parent: HTMLElement): void,
-    checkGrid?(parent: HTMLElement): void
-    renderTask?(parent: HTMLElement): void,
-    handleClick?(e: any): void
+    checkGrid(parent: HTMLElement): void
+    renderTask(parent: HTMLElement): void,
 }
 
 export enum EMode {
