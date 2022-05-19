@@ -17,6 +17,9 @@ export interface IDigit {
 }
 
 export interface IModeController {
+    variants: any[];
+    currentMode: IMode;
+
     generateGrid(parent: HTMLElement): void;
     checkGrid(parent: HTMLElement): void;
 }

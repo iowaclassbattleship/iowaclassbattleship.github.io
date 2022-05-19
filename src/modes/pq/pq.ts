@@ -7,15 +7,15 @@ export enum E_PQ {
 }
 
 export class PQ implements IModeController {
-    private variants: any[] = [];
-    private currentMode: IMode;
+    variants: any[] = [];
+    currentMode: IMode;
 
     constructor(
         taskContainer: HTMLElement,
-        digits: number
+        nSymbols: number
     ) {
         this.variants = [
-            new PQ_Variant_1(taskContainer, digits)
+            new PQ_Variant_1(taskContainer, nSymbols)
         ];
     }
 

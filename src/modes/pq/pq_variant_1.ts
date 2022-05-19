@@ -1,6 +1,10 @@
 import { IDigit, IExtendedHtmlDivElement, IMode } from "../../model/interfaces";
 import { CHECKED, CORRECT_CHECKED, CORRECT_UNCHECKED } from "../../tools";
-import { E_PQ } from "./pq";
+
+export enum E_PQ {
+    p,
+    q
+}
 
 export class PQ_Variant_1 implements IMode {
     taskText: string = "Check every p BEFORE a q";
