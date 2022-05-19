@@ -4,6 +4,7 @@ import { IMode } from "./model/interfaces";
 import { PQ } from "./modes/pq";
 import { Star } from "./modes/star";
 import { Numbers } from "./modes/numbers";
+import { GUI } from "./gui";
 
 const digits: number = 1600;
 
@@ -17,22 +18,10 @@ const modes: IMode[] = [
     new Numbers(task, digits)
 ];
 
-export function renderControls(): void {
-    const controls: HTMLElement = document.querySelector(`[data-js="controls"]`);
-
-    const generateButton: HTMLElement = document.createElement("button");
-    generateButton.addEventListener("click", () => generate());
-    generateButton.innerHTML = "generate";
-
-    const checkButton: HTMLElement = document.createElement("button");
-    checkButton.addEventListener("click", () => check());
-    checkButton.innerHTML = "check";
-
-    controls.appendChild(generateButton);
-    controls.appendChild(checkButton);
-}
-
 let randomMode: IMode = null;
+
+const gui: GUI = new GUI;
+gui.renderControls();
 
 export function generate() {
     randomMode = modes[Math.floor(Math.random() * modes.length)];
@@ -42,5 +31,3 @@ export function generate() {
 export function check() {
     randomMode.checkGrid(worksheet);
 }
-
-renderControls();

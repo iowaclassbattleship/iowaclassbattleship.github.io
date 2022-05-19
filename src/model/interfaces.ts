@@ -26,3 +26,16 @@ export interface IMode {
     renderTask(parent: HTMLElement): void,
     handleClick(e: any): void
 }
+
+export enum EMode {
+    RANDOM_ALL,
+    PQ,
+    NUMBERS,
+    STAR,
+    CIRCLE
+}
+
+export interface ICoords {
+    x: string;
+    y: string;
+}

@@ -1,12 +1,12 @@
-import { IExtendedSVGSVGElement, IMode } from "../model/interfaces";
-import { getDimensions } from "../tools";
+import { IExtendedSVGSVGElement, IMode, ICoords } from "../model/interfaces";
+import { getDimensions, getPerimeterCoords } from "../tools";
 
 export class Star implements IMode {
     taskText: string = "fartharder";
     taskContainer: HTMLElement;
     digits: number;
     dimensions: number = 0;
-    coords: any[] = [];
+    coords: ICoords[] = [];
 
     public constructor(
         taskContainer: HTMLElement,
@@ -15,40 +15,7 @@ export class Star implements IMode {
         this.taskContainer = taskContainer;
         this.dimensions = getDimensions() - 2;
         this.digits = digits;
-        this.coords = [
-            {
-                x: "0",
-                y: "0"
-            },
-            {
-                x: "" + this.dimensions / 2,
-                y: "0"
-            },
-            {
-                x: "" + this.dimensions,
-                y: "0"
-            },
-            {
-                x: "0",
-                y: "" + this.dimensions / 2
-            },
-            {
-                x: "0",
-                y: "" + this.dimensions
-            },
-            {
-                x: "" + this.dimensions / 2,
-                y: "" + this.dimensions
-            },
-            {
-                x: "" + this.dimensions / 2,
-                y: "" + this.dimensions
-            },
-            {
-                x: "" + this.dimensions,
-                y: "" + this.dimensions
-            },
-        ];
+        this.coords = getPerimeterCoords(this.dimensions);
     }
 
     generateGrid(parent: HTMLElement): void {
@@ -74,7 +41,6 @@ export class Star implements IMode {
                     elements[i].classList.add("correct--unchecked");
                 }
             } else {
-                console.log(elements[i].meta.checked);
                 if (elements[i].meta.checked) {
                     elements[i].classList.add("correct-unchecked");
                 }
@@ -105,11 +71,8 @@ export class Star implements IMode {
         const random: number = Math.floor(this.norm() * 8);
 
         const c = [].concat(this.coords);
-        for (let i = 0; i < random + 1; i++) {
-            const line = document.createElementNS(
-                "http://www.w3.org/2000/svg",
-                "line",
-            );
+        for (let i = 0; i < random; i++) {
+            const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
             let randomCoordIdx = Math.floor(Math.random() * c.length);
             let coord = c[randomCoordIdx]
             line.setAttribute("x1", "" + this.dimensions / 2);
@@ -123,7 +86,7 @@ export class Star implements IMode {
 
         svg.style.padding = "1px";
         svg.meta = {
-            number: random + 1,
+            number: random,
             checked: false
         }
 
