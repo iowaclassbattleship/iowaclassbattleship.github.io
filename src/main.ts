@@ -1,9 +1,9 @@
 import "../styles/styles.scss";
-import { Circle } from "./modes/circle";
+import { Circle } from "./modes/circle/circle";
 import { EMode, IMode } from "./model/interfaces";
-import { PQ } from "./modes/pq";
-import { Star } from "./modes/star";
-import { Numbers } from "./modes/numbers";
+import { PQ } from "./modes/pq/pq";
+import { Star } from "./modes/star/star";
+import { Numbers } from "./modes/numbers/numbers";
 import { GUI } from "./gui";
 
 const digits: number = 1600;

@@ -1,5 +1,5 @@
-import { IExtendedSVGSVGElement, IMode, ICoords } from "../model/interfaces";
-import { CORRECT_CHECKED, CORRECT_UNCHECKED, getDimensions, getPerimeterCoords, W3_SVG } from "../tools";
+import { IExtendedSVGSVGElement, IMode, ICoords } from "../../model/interfaces";
+import { CORRECT_CHECKED, CORRECT_UNCHECKED, getDimensions, getPerimeterCoords, W3_SVG } from "../../tools";
 
 export class Star implements IMode {
     taskText: string = "fartharder";
