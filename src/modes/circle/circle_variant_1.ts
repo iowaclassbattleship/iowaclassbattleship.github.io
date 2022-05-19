@@ -1,5 +1,5 @@
-import { ICoords, IExtendedSVGSVGElement, IMode } from "../../model/interfaces";
-import { getPerimeterCoords, getDimensions, getCenterCoords, CORRECT_UNCHECKED, CORRECT_CHECKED, W3_SVG } from "../../tools";
+import { IMode } from "../../model/interfaces";
+import { CORRECT_UNCHECKED, CORRECT_CHECKED } from "../../tools";
 
 export class Circle_Variant_1 implements IMode {
     taskText: string = "John Mcclain";

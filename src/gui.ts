@@ -1,5 +1,4 @@
 import { check, generate } from "./main";
-import { EMode } from "./model/interfaces";
 
 export class GUI {
     public renderControls(): void {

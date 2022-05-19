@@ -1,5 +1,5 @@
-import { IExtendedSVGSVGElement, IMode, ICoords } from "../../model/interfaces";
-import { CORRECT_CHECKED, CORRECT_UNCHECKED, getDimensions, getPerimeterCoords, W3_SVG } from "../../tools";
+import { IMode, ICoords } from "../../model/interfaces";
+import { CORRECT_CHECKED, CORRECT_UNCHECKED } from "../../tools";
 
 export class Star_Variant_1 implements IMode {
     taskText: string;

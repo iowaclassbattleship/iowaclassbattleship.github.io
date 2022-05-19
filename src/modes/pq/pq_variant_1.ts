@@ -1,6 +1,5 @@
-import { setDefaultResultOrder } from "dns";
-import { IDigit, IExtendedHtmlDivElement, IMode } from "../../model/interfaces";
-import { CHECKED, CORRECT_CHECKED, CORRECT_UNCHECKED } from "../../tools";
+import { IMode } from "../../model/interfaces";
+import { CORRECT_CHECKED, CORRECT_UNCHECKED } from "../../tools";
 
 export enum E_PQ {
     p,
