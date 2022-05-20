@@ -26,7 +26,7 @@ export function isOdd(n: number): boolean {
     return n % 2 !== 0;
 }
 
-export function getPerimeterCoords(dimension: number): ICoords[] {
+export function getSquarePerimeterCoords(dimension: number): ICoords[] {
     return [
         {
             x: "0",

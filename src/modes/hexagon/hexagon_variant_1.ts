@@ -1,4 +1,4 @@
-import { IMode } from "../../model/interfaces";
+import { IFinished, IMode } from "../../model/interfaces";
 
 export class Hexagon_Variant_1 implements IMode {
     taskText: string;
@@ -13,7 +13,7 @@ export class Hexagon_Variant_1 implements IMode {
         throw new Error("Method not implemented.");
     }
 
-    checkGrid(parent: HTMLElement): void {
+    checkGrid(parent: HTMLElement): IFinished {
         throw new Error("Method not implemented.");
     }
 

@@ -1,4 +1,5 @@
 import { IMode, IModeController } from "../../model/interfaces";
+import { getDimensions } from "../../tools";
 import { Hexagon_Variant_1 } from "./hexagon_variant_1";
 
 export class Hexagon implements IModeController {
@@ -6,11 +7,13 @@ export class Hexagon implements IModeController {
     currentMode: IMode;
     taskContainer: HTMLElement;
     nSymbols: number;
+    dimensions: number;
 
     public constructor(
         taskContainer: HTMLElement,
         nSymbols: number
     ) {
+        this.dimensions = getDimensions();
         this.taskContainer = taskContainer;
         this.nSymbols = nSymbols;
         this.variants = [

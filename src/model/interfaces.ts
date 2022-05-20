@@ -27,11 +27,16 @@ export interface IModeController {
 }
 
 export interface IMode {
-    taskText: string,
-    taskContainer: HTMLElement
+    taskText: string;
+    taskContainer: HTMLElement;
 
-    checkGrid(parent: HTMLElement): void
-    renderTask(parent: HTMLElement): void,
+    checkGrid(parent: HTMLElement): IFinished;
+    renderTask(parent: HTMLElement): void;
+}
+
+export interface IFinished {
+    correct: number;
+    incorrect: number;
 }
 
 export enum EMode {

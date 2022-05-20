@@ -1,5 +1,5 @@
 import { ICoords, IExtendedSVGSVGElement, IMode, IModeController } from "../../model/interfaces";
-import { getCenterCoords, getDimensions, getPerimeterCoords, W3_SVG } from "../../tools";
+import { getCenterCoords, getDimensions, getSquarePerimeterCoords, W3_SVG } from "../../tools";
 import { Circle_Variant_1 } from "./circle_variant_1";
 
 export class Circle implements IModeController {
@@ -16,7 +16,7 @@ export class Circle implements IModeController {
     ) {
         this.taskContainer = taskContainer;
         this.dimensions = getDimensions();
-        this.coords = getPerimeterCoords(this.dimensions);
+        this.coords = getSquarePerimeterCoords(this.dimensions);
         this.nSymbols = nSymbols;
         this.variants = [
             new Circle_Variant_1(taskContainer)

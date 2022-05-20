@@ -1,5 +1,5 @@
-import { ICoords, IExtendedSVGSVGElement, IMode, IModeController } from "../../model/interfaces";
-import { getDimensions, getPerimeterCoords, W3_SVG } from "../../tools";
+import { ICoords, IExtendedSVGSVGElement, IFinished, IMode, IModeController } from "../../model/interfaces";
+import { getDimensions, getSquarePerimeterCoords, W3_SVG } from "../../tools";
 import { Star_Variant_1 } from "./star_variant_1";
 
 export class Star implements IModeController {
@@ -17,8 +17,10 @@ export class Star implements IModeController {
         this.nSymbols = nSymbols;
         this.taskContainer = taskContainer;
         this.dimensions = getDimensions() - 2;
-        this.coords = getPerimeterCoords(this.dimensions);
+        this.coords = getSquarePerimeterCoords(this.dimensions);
         this.variants = [
+            new Star_Variant_1(taskContainer, nSymbols, Math.floor(Math.random() * 4)),
+            new Star_Variant_1(taskContainer, nSymbols, Math.floor(Math.random() * 5)),
             new Star_Variant_1(taskContainer, nSymbols, Math.floor(Math.random() * 6))
         ];
     }
@@ -67,7 +69,11 @@ export class Star implements IModeController {
     }
 
     checkGrid(parent: HTMLElement): void {
-        this.currentMode.checkGrid(parent);
+        const { correct, incorrect }: IFinished = this.currentMode.checkGrid(parent);
+
+        const total = correct + incorrect;
+
+        alert(`You got ${correct} correct, ${incorrect} incorrect. Total score: ${correct / total}`);
     }
 
     handleClick(e: IExtendedSVGSVGElement): void {

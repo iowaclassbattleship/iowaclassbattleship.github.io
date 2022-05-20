@@ -1,4 +1,4 @@
-import { IMode } from "../../model/interfaces";
+import { IFinished, IMode } from "../../model/interfaces";
 import { CORRECT_UNCHECKED, CORRECT_CHECKED } from "../../tools";
 
 export class Circle_Variant_1 implements IMode {
@@ -11,8 +11,11 @@ export class Circle_Variant_1 implements IMode {
         this.taskContainer = taskContainer;
     }
 
-    checkGrid(parent: HTMLElement): void {
+    checkGrid(parent: HTMLElement): IFinished {
         const elements: any = parent.children;
+
+        let correct: number = 0;
+        let incorrect: number = 0;
 
         for (let i = 0; i < elements.length - 1; i++) {
             if (
@@ -23,13 +26,18 @@ export class Circle_Variant_1 implements IMode {
             ) {
                 if (elements[i].meta.checked) {
                     elements[i].classList.add(CORRECT_CHECKED);
+                    correct++;
                 } else {
                     elements[i].classList.add(CORRECT_UNCHECKED);
+                    incorrect++;
                 }
             } else if (elements[i].meta.checked) {
                 elements[i].classList.add(CORRECT_UNCHECKED);
+                incorrect++;
             }
         }
+
+        return { correct, incorrect };
     }
 
     renderTask(parent: HTMLElement): void {
