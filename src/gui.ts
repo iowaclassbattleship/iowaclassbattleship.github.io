@@ -1,43 +1,30 @@
-import { check, generate } from "./main";
+import { IExercises } from "./model/interfaces";
 
 export class GUI {
-    public renderControls(): void {
-        const controls: HTMLElement = document.querySelector(`[data-js="controls"]`);
+    private menuSelect: HTMLElement;
+    private exercises: IExercises[];
+    private parent: HTMLElement;
 
-        controls.appendChild(this.generateButton(generate, "generate"));
-        controls.appendChild(this.generateButton(check, "check"));
-        controls.appendChild(this.generateSelect("random", "PQ", "Numbers", "Star", "Circle"));
+    public constructor(
+        parent: HTMLElement,
+        exercises: IExercises[]
+    ) {
+        // const template = require("./template/template.html");
+    
+        this.menuSelect = document.querySelector(`[data-js="menu-select"]`);
+        this.exercises = exercises;
+        this.parent = parent;
+        this.parent.innerHTML = `<div class="exercise-select" data-js="exercise-select"></div>`;
     }
 
-    public getSelectValue(): string {
-        const select: HTMLSelectElement = <HTMLSelectElement>document.getElementById("mode-select");
-        return select.value;
-    }
+    public renderOptions(): void {
+        const parent: HTMLElement = document.querySelector(`[data-js="exercise-select"]`);
 
-    private generateButton(callback: Function, label: string): HTMLButtonElement {
-        const button: HTMLButtonElement = document.createElement("button");
-        button.addEventListener("click", () => callback());
-        button.innerText = label;
-        return button;
-    }
-
-    private generateSelect(...options: string[]): HTMLSelectElement {
-        const select: HTMLSelectElement = document.createElement("select");
-        select.id = "mode-select";
-
-        for (let i = 0; i < options.length; i++) {
-            select.appendChild(this.generateOption(i, options[i]))
+        for (const exercise of this.exercises) {
+            const btn = document.createElement("button");
+            btn.innerText = exercise.label;
+            btn.addEventListener("click", () => exercise.application.renderGui(parent));
+            parent.appendChild(btn);
         }
-
-        return select;
-    }
-
-    private generateOption(mode: number, option: string): HTMLOptionElement {
-        const o: HTMLOptionElement = document.createElement("option");
-
-        o.value = "" + mode;
-        o.innerText = option;
-
-        return o;
     }
 }

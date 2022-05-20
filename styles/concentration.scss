@@ -1,0 +1,92 @@
+@media print {
+    body {
+        width: 21cm;
+        height: 29.7cm;
+        margin: 30mm 0mm 30mm 0mm;
+        flex-direction: column-reverse;
+    }
+
+    .worksheet-container {
+        width: 200mm;
+    }
+
+    .grid {
+        border: 0;
+    }
+
+    .controls {
+        visibility: hidden;
+        width: 0;
+    }
+}
+
+.app {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    font-family: 'Trebuchet MS', sans-serif;
+
+    .head {
+        position: relative;
+        height: 100px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .worksheet-container {
+        width: 100%;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .grid {
+            width: 800px;
+            height: 800px;
+            border: solid black 1px;
+            display: grid;
+            grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto;
+
+            .item {
+                width: 5mm;
+                height: 5mm;
+                text-align: center;
+                position: relative;
+            }
+
+            .checked::after {
+                content: " ";
+                position: absolute;
+                left: 0;
+                right: 0;
+                top: calc(50% - 1px);
+                height: 2px;
+                background: black;
+                transform: rotate(-45deg);
+            }
+
+            .correct--checked {
+                background: green;
+            }
+
+            .correct--unchecked {
+                background: red;
+            }
+        }
+    }
+}
+
+#hidden-pixel-density-measure {
+    width: 5mm;
+}
