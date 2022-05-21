@@ -1,4 +1,3 @@
-import { Concentration } from "./concentration";
 import { EMode, IModeController } from "./model/interfaces";
 import { Circle } from "./modes/circle/circle";
 import { Numbers } from "./modes/numbers/numbers";
@@ -9,31 +8,19 @@ import { Star } from "./modes/star/star";
 // perhaps with observables
 
 export class GUI {
-    private parent: HTMLElement;
     private modes: IModeController[];
     private randomModeController: IModeController;
     private currentMode: number;
     private worksheet: HTMLElement;
     private taskContainer: HTMLElement;
-    private nSymbols: number = 1600;
+    private nSymbols: number;
 
     public constructor(
-        parent: HTMLElement
+        nSymbols: number
     ) {
-        this.parent = parent;
-        const template: string = `<div class="head">
-        <div class="task" data-js="task"></div>
-    </div>
-    <main class="worksheet-container">
-        <div class="controls" data-js="controls"></div>
-        <div class="grid" data-js="worksheet"></div>
-    </main>
-    
-    <div id="hidden-pixel-density-measure"></div>`;
-
-        this.parent.innerHTML = template;
         this.taskContainer = document.querySelector(`[data-js="task"]`);
         this.worksheet = document.querySelector(`[data-js="worksheet"]`);
+        this.nSymbols = nSymbols;
         this.modes = [
             new PQ(this.taskContainer, this.nSymbols),
             new Numbers(this.taskContainer, this.nSymbols),
@@ -42,7 +29,7 @@ export class GUI {
         ];
     }
 
-    public renderControls(con: Concentration): void {
+    public renderControls(): void {
         const controls: HTMLElement = document.querySelector(`[data-js="controls"]`);
 
         controls.appendChild(this.generateButton1("generate"));

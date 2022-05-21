@@ -1,4 +1,32 @@
-body, html {
+body {
     width: 100%;
     margin: 0;
+}
+
+header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50px;
+    background: lightblue;
+
+    .back-button-container {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        width: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .back-button {
+            color: white;
+
+            span {
+                font-size: 30px;
+            }
+        }
+    }
 }
