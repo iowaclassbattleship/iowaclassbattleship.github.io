@@ -19,9 +19,9 @@ export class Star implements IModeController {
         this.dimensions = getDimensions() - 2;
         this.coords = getSquarePerimeterCoords(this.dimensions);
         this.variants = [
-            new Star_Variant_1(taskContainer, nSymbols, Math.floor(Math.random() * 4)),
-            new Star_Variant_1(taskContainer, nSymbols, Math.floor(Math.random() * 5)),
-            new Star_Variant_1(taskContainer, nSymbols, Math.floor(Math.random() * 6))
+            new Star_Variant_1(taskContainer, nSymbols, 4),
+            new Star_Variant_1(taskContainer, nSymbols, 5),
+            new Star_Variant_1(taskContainer, nSymbols, 6)
         ];
     }
 

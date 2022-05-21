@@ -2,7 +2,7 @@ import "../../../styles/styles.scss";
 import "./styles/concentration.scss";
 
 import { GUI } from "./gui";
-import { EMode, IMode, IModeController } from "./model/interfaces";
+import { EMode, IModeController } from "./model/interfaces";
 import { PQ } from "./modes/pq/pq";
 import { Numbers } from "./modes/numbers/numbers";
 import { Star } from "./modes/star/star";
@@ -14,8 +14,8 @@ let currentMode: number;
 
 const gui: GUI = new GUI;
 gui.renderControls(
-    { label: "generate", callback: generate },
-    { label: "check", callback: check }
+    { label: "GENERATE", callback: generate },
+    { label: "CHECK", callback: check }
 );
 
 const taskContainer: HTMLElement = document.querySelector(`[data-js="task"]`);
@@ -27,6 +27,10 @@ const modes: IModeController[] = [
     new Star(taskContainer, nSymbols),
     new Circle(taskContainer, nSymbols)
 ];
+
+function beginTest() {
+    console.log("hehrhe");
+}
 
 function generate() {
     currentMode = Number(gui.getSelectValue());
@@ -48,6 +52,7 @@ function generate() {
     }
 
     randomModeController.generateGrid(worksheet);
+    gui.generateWorksheetOverlay(worksheet, beginTest);
 }
 
 function check() {

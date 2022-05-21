@@ -1,4 +1,4 @@
-import { IButtonConfig } from "./model/interfaces";
+import { IButtonConfig, IExtendedHtmlDivElement } from "./model/interfaces";
 
 export class GUI {
     public renderControls(...buttonConfig: IButtonConfig[]): void {
@@ -14,6 +14,22 @@ export class GUI {
     public getSelectValue(): string {
         const select: HTMLSelectElement = <HTMLSelectElement>document.getElementById("mode-select");
         return select.value;
+    }
+
+    public generateWorksheetOverlay(parent: HTMLElement, callback: Function): void {
+        const overlay = document.createElement("div");
+        overlay.classList.add("worksheet-overlay");
+        overlay.id = "worksheet-overlay";
+        const continueButton = document.createElement("button");
+        continueButton.innerText = "BEGINN";
+        continueButton.addEventListener("click", () => this.removeWorksheetOverlay(parent, callback));
+        overlay.appendChild(continueButton);
+        parent.appendChild(overlay);
+    }
+
+    private removeWorksheetOverlay(parent: HTMLElement, callback: Function) {
+        parent.removeChild(document.getElementById("worksheet-overlay"));
+        callback();
     }
 
     private generateButton(label: string, callback: Function): HTMLButtonElement {

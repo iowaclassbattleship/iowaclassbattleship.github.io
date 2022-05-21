@@ -16,6 +16,7 @@ export class GUI {
             const a = document.createElement("a");
             a.innerText = exercise.label;
             a.href = exercise.link;
+            a.classList.add("link-button");
             parent.appendChild(a);
         }
     }
