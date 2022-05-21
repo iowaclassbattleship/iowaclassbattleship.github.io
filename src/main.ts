@@ -8,6 +8,10 @@ const exercises: IExercises[] = [
     {
         label: "Konzentriertes Arbeiten",
         link: `${window.location.href}concentration.html`
+    },
+    {
+        label: "Fakten Lernen",
+        link: `${window.location.href}facts.html`
     }
 ];
 

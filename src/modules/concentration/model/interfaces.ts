@@ -51,3 +51,8 @@ export interface ICoords {
     x: string;
     y: string;
 }
+
+export interface IButtonConfig {
+    label: string;
+    callback: Function;
+}
