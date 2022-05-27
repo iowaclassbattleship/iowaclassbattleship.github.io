@@ -14,7 +14,7 @@ let currentMode: number;
 
 const gui: GUI = new GUI;
 gui.renderControls(
-    { label: "GENERATE", callback: generate },
+    { label: "NEU", callback: generate },
     { label: "CHECK", callback: check }
 );
 

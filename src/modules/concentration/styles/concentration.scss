@@ -80,11 +80,10 @@
                 right: 0;
                 bottom: 0;
                 left: 0;
-                opacity: .98;
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                background: white;
+                background: rgba($color: black, $alpha: 0.98);
                 border: solid #e91e63 1px;
                 border-radius: 3px;
             }

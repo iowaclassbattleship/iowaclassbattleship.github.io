@@ -21,7 +21,6 @@ export class Star implements IModeController {
         this.variants = [
             new Star_Variant_1(taskContainer, nSymbols, 4),
             new Star_Variant_1(taskContainer, nSymbols, 5),
-            new Star_Variant_1(taskContainer, nSymbols, 6)
         ];
     }
 
