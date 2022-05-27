@@ -1,5 +1,5 @@
 import { IExtendedHtmlDivElement, IMode, IModeController } from "../../model/interfaces";
-import { CHECKED } from "../../tools";
+import { CHECKED, getDimensions } from "../../tools";
 import { Numbers_Variant_1 } from "./numbers_variant_1";
 
 export class Numbers implements IModeController {
@@ -7,11 +7,13 @@ export class Numbers implements IModeController {
     currentMode: IMode;
     taskContainer: HTMLElement;
     nSymbols: number;
+    dimensions: number;
 
     constructor(
         taskContainer: HTMLElement,
         nSymbols: number
     ) {
+        this.dimensions = getDimensions();
         this.taskContainer = taskContainer;
         this.nSymbols = nSymbols;
         this.variants = [

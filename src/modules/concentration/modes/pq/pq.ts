@@ -1,5 +1,5 @@
 import { IDigit, IExtendedHtmlDivElement, IMode, IModeController } from "../../model/interfaces";
-import { CHECKED } from "../../tools";
+import { CHECKED, getDimensions } from "../../tools";
 import { PQ_Variant_1 } from "./pq_variant_1";
 
 export enum E_PQ {
@@ -33,6 +33,8 @@ export class PQ implements IModeController {
 
             const d: IExtendedHtmlDivElement = document.createElement("div");
             d.classList.add("item");
+            d.style.width = `${getDimensions()}px`;
+            d.style.height = `${getDimensions()}px`;
             d.innerHTML = digit.digit;
 
             d.meta = {

@@ -16,7 +16,7 @@ export class Star implements IModeController {
     ) {
         this.nSymbols = nSymbols;
         this.taskContainer = taskContainer;
-        this.dimensions = getDimensions() - 2;
+        this.dimensions = getDimensions();
         this.coords = getSquarePerimeterCoords(this.dimensions);
         this.variants = [
             new Star_Variant_1(taskContainer, nSymbols, 4),
@@ -49,16 +49,15 @@ export class Star implements IModeController {
             const line = document.createElementNS(W3_SVG, "line");
             let randomCoordIdx = Math.floor(Math.random() * c.length);
             let coord = c[randomCoordIdx]
-            line.setAttribute("x1", "" + this.dimensions / 2);
-            line.setAttribute("y1", "" + this.dimensions / 2);
-            line.setAttribute("x2", coord.x);
-            line.setAttribute("y2", coord.y);
+            line.setAttribute("x1", "" + (this.dimensions / 2) + Math.floor(Math.random() * 4));
+            line.setAttribute("y1", "" + (this.dimensions / 2) + Math.floor(Math.random() * 4));
+            line.setAttribute("x2", "" + Number(coord.x - Math.floor(Math.random() * 4)));
+            line.setAttribute("y2", "" + Number(coord.y - Math.floor(Math.random() * 4)));
             line.setAttribute("style", "stroke:rgb(0,0,0);stroke-width:1")
             c.splice(randomCoordIdx, 1);
             svg.appendChild(line);
         }
 
-        svg.style.padding = "1px";
         svg.meta = {
             number: random,
             checked: false

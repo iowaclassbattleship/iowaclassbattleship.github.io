@@ -7,8 +7,10 @@ export const CHECKED: string = "checked";
 
 export const W3_SVG: "http://www.w3.org/2000/svg" = "http://www.w3.org/2000/svg";
 
+const hpdm: HTMLElement = document.getElementById("hidden-pixel-density-measure");
+
 export function getDimensions(): number {
-    return document.getElementById("hidden-pixel-density-measure").offsetWidth;
+    return hpdm.offsetWidth;
 }
 
 export function getCenterCoords(dimension: number): ICoords {

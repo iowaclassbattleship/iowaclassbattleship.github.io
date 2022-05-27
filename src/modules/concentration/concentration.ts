@@ -52,7 +52,7 @@ function generate() {
     }
 
     randomModeController.generateGrid(worksheet);
-    gui.generateWorksheetOverlay(worksheet, beginTest);
+    // gui.generateWorksheetOverlay(worksheet, beginTest);
 }
 
 function check() {
