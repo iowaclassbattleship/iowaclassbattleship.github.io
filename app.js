@@ -30,6 +30,7 @@ function check() {
 $('mode').append(new Option('Random', ''), ...Object.entries(modes).map(([key, m]) => new Option(m.label, key)));
 $('new').onclick = generate;
 $('check').onclick = check;
+$('testmode').onchange = e => document.body.classList.toggle('testmode', e.target.checked);
 $('print').onclick = () => print();
 $('numbers').append(...Array.from({ length: 40 }, (_, i) => Object.assign(document.createElement('div'), { textContent: i + 1 })))
 generate();

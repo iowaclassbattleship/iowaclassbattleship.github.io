@@ -1,13 +1,16 @@
-:root {
-    --border: solid 2px black;
-}
-
 body {
     margin: 0;
     font-family: 'Trebuchet MS', sans-serif;
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    --color: black;
+    --border: solid 2px black;
+}
+
+body.testmode {
+    --color: rgb(255, 68, 230);
 }
 
 header {
@@ -18,7 +21,8 @@ header {
 }
 
 button,
-select {
+select,
+.toggle span {
     font: inherit;
     font-size: 14px;
     letter-spacing: .04em;
@@ -31,15 +35,28 @@ select {
     transition: background .15s, color .15s;
 }
 
-button:hover {
+button:hover,
+.toggle:hover span {
     background: #222;
     color: #fff;
 }
 
 button:focus-visible,
-select:focus-visible {
+select:focus-visible,
+.toggle input:focus-visible + span {
     outline: 2px solid #222;
     outline-offset: 2px;
+}
+
+/* checkbox that looks like a button, filled while checked */
+.toggle input {
+    position: absolute;
+    opacity: 0;
+}
+
+.toggle input:checked + span {
+    background: #222;
+    color: #fff;
 }
 
 #new {
@@ -60,6 +77,7 @@ select:focus-visible {
     align-items: flex-end;
     justify-content: space-between;
     padding: 10px 26px;
+    color: var(--color);
 }
 
 .task-header #task {
@@ -101,6 +119,7 @@ aside {
     line-height: 5mm;
     text-align: center;
     position: relative;
+    color: var(--color);
 }
 
 #grid svg {
@@ -118,6 +137,10 @@ aside {
     height: 2px;
     background: #000;
     transform: rotate(-45deg);
+}
+
+#numbers {
+    color: var(--color);
 }
 
 .hit {

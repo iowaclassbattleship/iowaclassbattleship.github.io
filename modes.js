@@ -94,7 +94,7 @@ const modes = {
             cell: () => {
                 const v = Math.min(8, Math.max(0, Math.round(gauss() * 8)));
                 const rays = shuffle(edge).slice(0, v).map(([x, y]) => `<line x1="5" y1="5" x2="${x}" y2="${y}"/>`);
-                return { html: svg(`stroke="#000" stroke-width="1"`, rays.join('')), v };
+                return { html: svg(`stroke="currentColor" stroke-width="1"`, rays.join('')), v };
             },
             hit: (c, i) => c[i].v === n,
         })),
@@ -105,7 +105,7 @@ const modes = {
             task: `Mark all circles whose gap is ${name}`,
             cell: () => {
                 const v = rnd(8); // gap direction in 45° steps, 0 = bottom
-                return { html: svg('', `<path d="${ring}" fill="none" stroke="#000" stroke-width="1" transform="rotate(${v * 45} 5 5)"/>`), v };
+                return { html: svg('', `<path d="${ring}" fill="none" stroke="currentColor" stroke-width="1" transform="rotate(${v * 45} 5 5)"/>`), v };
             },
             hit: (c, i) => c[i].v % 2 === rest,
         })),
