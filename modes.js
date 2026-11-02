@@ -71,7 +71,6 @@ const drawParts = mask => {
         `<rect x="1" y="1" width="8" height="8"/>` + spokes.filter((_, k) => bit(mask, k)).map(s => lineAt(s)).join(''));
 };
 
-// box whose sides are thick (bit set) or thin
 const drawThick = mask => svg('stroke="currentColor" stroke-linecap="square"',
     SIDES.map((s, k) => lineAt(s, `stroke-width="${bit(mask, k) ? 1.6 : .5}"`)).join(''));
 
