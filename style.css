@@ -94,6 +94,10 @@ aside {
     color: var(--color);
 }
 
+.prime {
+    position: absolute; /* out of flow: the symbol stays centred, primes hang to its right */
+}
+
 #grid svg,
 #hint svg {
     display: block;
@@ -109,7 +113,7 @@ aside {
     top: calc(50% - 1px);
     height: 2px;
     background: var(--mark);
-    box-shadow: 0 0 0 1px #fff; /* halo keeps the mark visible on black, pink, green and red */
+    box-shadow: 0 0 0 1px #fff;
     transform: rotate(-45deg);
 }
 
@@ -127,7 +131,7 @@ aside {
 
 @page {
     size: A4;
-    margin: 0; /* no margin box, so the browser has no room for URL and page numbers */
+    margin: 0;
 }
 
 @media print {
@@ -137,12 +141,12 @@ aside {
 
     body {
         width: 21cm;
-        padding: 10mm; /* the page margin, drawn by hand because @page margin is 0 */
+        padding: 10mm;
         box-sizing: border-box;
     }
 
     main {
-        zoom: .9; /* worksheet is 209 x 283 mm, the printable area 190 x 277 mm */
+        zoom: .9;
     }
 
     #grid {

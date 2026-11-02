@@ -3,7 +3,7 @@ const CELL_DIM = 10;
 const rnd = n => Math.floor(Math.random() * n);
 const pick = a => a[rnd(a.length)];
 const even = n => n % 2 === 0;
-const odd = n => n % 2 === 1; // false for undefined, so row edges never match
+const odd = n => n % 2 === 1;
 const shuffle = a => a.map(x => [Math.random(), x]).sort((p, q) => p[0] - q[0]).map(p => p[1]);
 const svg = (attrs, body) => `<svg viewBox="0 0 ${CELL_DIM} ${CELL_DIM}" ${attrs}>${body}</svg>`;
 
@@ -45,12 +45,41 @@ const drawDie = v => svg('stroke="currentColor" stroke-width="0.8" fill="none"',
     `<rect x="1" y="1" width="8" height="8" rx="1.5"/>` +
     PIPS[v].map(([x, y]) => `<circle cx="${x}" cy="${y}" r=".8" fill="currentColor" stroke="none"/>`).join(''));
 
-// E-like symbol whose arms reach the edge of the box, turned by v * 90° clockwise
 const drawE = v => svg('', `<path d="M9 1H1.5V9H9M1.5 5H9" fill="none" stroke="currentColor" stroke-width="1" transform="rotate(${v * 90} 5 5)"/>`);
+
+const bit = (mask, k) => (mask >> k) & 1;
+const popcount = mask => [0, 1, 2, 3].reduce((n, k) => n + bit(mask, k), 0);
+const maskWith = min => pick([...Array(16).keys()].filter(mask => popcount(mask) >= min));
+const SIDES = [[1, 1, 9, 1], [9, 1, 9, 9], [1, 9, 9, 9], [1, 1, 1, 9]]; // box edges, in bit order
+const lineAt = ([x1, y1, x2, y2], extra = '') => `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" ${extra}/>`;
+
+const drawSides = ({ n, mask }) => svg('stroke="currentColor" stroke-width=".8" stroke-linecap="square"',
+    SIDES.filter((_, k) => bit(mask, k)).map(s => lineAt(s)).join('') +
+    `<text x="5" y="5.4" font-size="5" text-anchor="middle" dominant-baseline="central" fill="currentColor" stroke="none">${n}</text>`);
+
+const drawTurned = v => svg('fill="none" stroke="currentColor" stroke-width=".8"',
+    `<g transform="rotate(${v * 90} 5 5)"><rect x="1" y="1" width="8" height="8"/><polyline points="1,1 9,5 1,9"/></g>`);
+
+const drawLines = mask => svg('fill="none" stroke="currentColor" stroke-width=".8"',
+    `<rect x="1" y="1" width="8" height="8"/>` +
+    [0, 1, 2, 3].map(k => lineAt([1, 2.6 + 1.6 * k, 9, 2.6 + 1.6 * k], `stroke-width=".6" ${bit(mask, k) ? '' : 'stroke-dasharray=".9 .7"'}`)).join(''));
+
+const drawParts = mask => {
+    const x = 4 + Math.random() * 2, y = 4 + Math.random() * 2;
+    const spokes = [[x, 1, x, y], [x, y, 9, y], [x, y, x, 9], [1, y, x, y]];
+    return svg('fill="none" stroke="currentColor" stroke-width=".8"',
+        `<rect x="1" y="1" width="8" height="8"/>` + spokes.filter((_, k) => bit(mask, k)).map(s => lineAt(s)).join(''));
+};
+
+// box whose sides are thick (bit set) or thin
+const drawThick = mask => svg('stroke="currentColor" stroke-linecap="square"',
+    SIDES.map((s, k) => lineAt(s, `stroke-width="${bit(mask, k) ? 1.6 : .5}"`)).join(''));
+
+const drawText = v => `${String(v)[0]}<span class="prime">${String(v).slice(1)}</span>`;
 
 const defaultChoices = (choices) => {
     const v = pick(choices);
-    return { html: v, v };
+    return { html: drawText(v), v };
 }
 
 const modes = {
@@ -99,6 +128,13 @@ const modes = {
                 cell: () => defaultChoices(['p', 'q']),
                 hit: (c, i) => c[i].v === "q"
             },
+            {
+                task: "Mark every b''",
+                difficulty: 0,
+                hint: ["b'", "b''", "b'", "b", "b", "b'", "b''", "b''", "b'", "b",],
+                cell: () => defaultChoices(['b', "b'", "b''"]),
+                hit: (c, i) => c[i].v === "b''"
+            },
         ]
     },
     rotatedLetters: {
@@ -131,6 +167,13 @@ const modes = {
                 cell: () => { const v = pick([1, 3, 5, 7, 9, 2, 2, 4, 4, 6, 6, 8, 8]); return { html: v, v }; },
                 hit: (c, i) => even(c[i].v) && odd(at(c, i, -1)) && odd(at(c, i, 1)),
             },
+            {
+                task: 'Mark every number that is followed by its double',
+                difficulty: 2,
+                hint: [1, 2, 4, 8, 3, 6, 2, 3, 4, 8],
+                cell: () => { const v = pick([1, 2, 3, 4, 6, 8]); return { html: v, v }; },
+                hit: (c, i) => at(c, i, 1) === 2 * c[i].v,
+            },
             ...[4, 5, 6, 7, 8, 9].map(n => ({
                 task: `Mark every number which added with its successor equals ${n}`,
                 difficulty: 2,
@@ -160,6 +203,61 @@ const modes = {
                 hit: (c, i) => c[i].v + at(c, i, 1) === n
             })),
         ],
+    },
+    squares: {
+        label: 'squares',
+        variants: [{
+            task: 'Mark every square whose number equals its number of sides',
+            difficulty: 1,
+            hint: [[4, 15], [3, 7], [3, 3], [4, 5], [3, 3], [4, 14], [3, 13], [3, 12], [4, 15], [4, 10]].map(([n, mask]) => ({ n, mask })),
+            draw: drawSides,
+            cell: () => { const v = { n: 2 + rnd(3), mask: maskWith(2) }; return { html: drawSides(v), v }; },
+            hit: (c, i) => popcount(c[i].v.mask) === c[i].v.n,
+        }],
+    },
+    turned: {
+        label: 'turned symbols',
+        variants: [{
+            task: 'Mark every symbol that is followed by the same symbol turned by 180°',
+            difficulty: 2,
+            hint: [0, 2, 1, 3, 3, 1, 0, 0, 2, 1],
+            draw: drawTurned,
+            cell: () => { const v = rnd(4); return { html: drawTurned(v), v }; },
+            hit: (c, i) => at(c, i, 1) === (c[i].v + 2) % 4,
+        }],
+    },
+    lines: {
+        label: 'lines',
+        variants: [{
+            task: 'Mark every box whose lines alternate between solid and dashed',
+            difficulty: 1,
+            hint: [5, 10, 3, 5, 12, 10, 0, 15, 5, 6],
+            draw: drawLines,
+            cell: () => { const v = rnd(16); return { html: drawLines(v), v }; },
+            hit: (c, i) => c[i].v === 5 || c[i].v === 10,
+        }],
+    },
+    parts: {
+        label: 'parts',
+        variants: [2, 3, 4].map(n => ({
+            task: `Mark every box that is divided into exactly ${n} parts`,
+            difficulty: 2,
+            hint: [15, 7, 3, 5, 11, 14, 12, 9, 13, 10],
+            draw: drawParts,
+            cell: () => { const v = maskWith(2); return { html: drawParts(v), v }; },
+            hit: (c, i) => popcount(c[i].v) === n, // 2 spokes make 2 parts, 3 make 3, 4 make 4
+        })),
+    },
+    thick: {
+        label: 'thick sides',
+        variants: [{
+            task: 'Mark every box whose sides are the same thickness as the opposite side',
+            difficulty: 1,
+            hint: [15, 0, 5, 10, 3, 12, 6, 9, 0, 7],
+            draw: drawThick,
+            cell: () => { const v = rnd(16); return { html: drawThick(v), v }; },
+            hit: (c, i) => bit(c[i].v, 0) === bit(c[i].v, 2) && bit(c[i].v, 1) === bit(c[i].v, 3),
+        }],
     },
     star: {
         label: 'star',

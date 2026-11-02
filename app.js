@@ -7,12 +7,12 @@ function generate() {
     round = pick(modes[$('mode').value || pick(Object.keys(modes))].variants);
     cells = Array.from({ length: N }, round.cell);
     $('task').textContent = round.task;
-    $('difficulty').textContent = round.difficulty === 0 ? "easy" : round.difficulty === 1 ? "medium" : "hard"
-    $('solution').textContent = ``;
+    $('difficulty').textContent = round.difficulty === 0 ? 'easy' : round.difficulty === 1 ? 'medium' : 'hard'
+    $('solution').textContent = '';
     const hint = (round.hint ?? []).map(v => ({ v }));
     $('hint').replaceChildren(...hint.map((c, i) => {
         const d = document.createElement('div');
-        d.innerHTML = (round.draw ?? String)(c.v);
+        d.innerHTML = (round.draw ?? drawText)(c.v);
         if (round.hit(hint, i)) d.classList.add('checked');
         return d;
     }));
