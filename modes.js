@@ -136,19 +136,6 @@ const modes = {
             },
         ]
     },
-    rotatedLetters: {
-        label: 'rotated symbols',
-        variants: [
-            ['upright', 0], ['rotated 90° clockwise', 1], ['upside down', 2], ['rotated 90° counterclockwise', 3],
-        ].map(([name, turns]) => ({
-            task: `Mark every symbol that is ${name}`,
-            difficulty: 1,
-            hint: [0, 1, 2, 3, turns, 2, 1, turns, 3, 0],
-            draw: drawE,
-            cell: () => { const v = rnd(4); return { html: drawE(v), v }; },
-            hit: (c, i) => c[i].v === turns,
-        })),
-    },
     numbers: {
         label: 'numbers',
         variants: [
@@ -214,16 +201,30 @@ const modes = {
             hit: (c, i) => popcount(c[i].v.mask) === c[i].v.n,
         }],
     },
-    turned: {
-        label: 'turned symbols',
-        variants: [{
-            task: 'Mark every symbol that is followed by the same symbol turned by 180°',
-            difficulty: 2,
-            hint: [0, 2, 1, 3, 3, 1, 0, 0, 2, 1],
-            draw: drawTurned,
-            cell: () => { const v = rnd(4); return { html: drawTurned(v), v }; },
-            hit: (c, i) => at(c, i, 1) === (c[i].v + 2) % 4,
-        }],
+    rotated: {
+        label: 'rotated symbols',
+        variants: [
+            ...[
+                ["turned by 180°", 2], ["turned by 90°", 1]
+            ].map(([name, turns]) => ({
+                task: `Mark every symbol that is followed by the same symbol ${name}`,
+                difficulty: 2,
+                hint: [0, turns, 1, (1 + turns) % 4, 3, 1, 0, 0, turns, 1],
+                draw: drawTurned,
+                cell: () => { const v = rnd(4); return { html: drawTurned(v), v }; },
+                hit: (c, i) => at(c, i, 1) === (c[i].v + turns) % 4,
+            })),
+            ...[
+                ['upright', 0], ['rotated 90° clockwise', 1], ['upside down', 2], ['rotated 90° counterclockwise', 3],
+            ].map(([name, turns]) => ({
+                task: `Mark every symbol that is ${name}`,
+                difficulty: 1,
+                hint: [0, 1, 2, 3, turns, 2, 1, turns, 3, 0],
+                draw: drawE,
+                cell: () => { const v = rnd(4); return { html: drawE(v), v }; },
+                hit: (c, i) => c[i].v === turns,
+            }))
+        ],
     },
     lines: {
         label: 'lines',
